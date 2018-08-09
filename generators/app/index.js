@@ -79,49 +79,43 @@ module.exports = class extends Generator {
       start: "webpack-dev-server --open --config config/webpack.dev.js",
       build: "webpack --config config/webpack.prod.js"
     };
+
+    pkg.devDependencies = {
+      "babel-core": "^6.26.3",
+      "babel-loader": "^7.1.5",
+      "babel-preset-react": "^6.24.1",
+      "babel-preset-stage-2": "^6.24.1",
+      "css-loader": "^1.0.0",
+      "mini-css-extract-plugin": "^0.4.1",
+      "node-sass": "^4.9.2",
+      "react-hot-loader": "^4.3.3",
+      "sass-loader": "^7.1.0",
+      "style-loader": "^0.21.0",
+      "uglifyjs-webpack-plugin": "^1.2.7",
+      webpack: "^4.15.1",
+      "webpack-cli": "^3.0.8",
+      "webpack-dev-server": "^3.1.4",
+      "webpack-merge": "^4.1.3"
+    };
+
+    pkg.dependencies = {
+      "babel-preset-env": "^1.7.0",
+      "prop-types": "^15.6.2",
+      react: "^16.4.1",
+      "react-dom": "^16.4.1",
+      "react-redux": "^5.0.7",
+      "react-router-dom": "^4.3.1",
+      redux: "^4.0.0"
+    };
+
     this.fs.writeJSON(this.destinationPath("package.json"), pkg);
   }
 
   install() {
-    this.npmInstall(
-      [
-        "babel-preset-env",
-        "prop-types",
-        "react",
-        "react-dom",
-        "react-redux",
-        "react-router-dom",
-        "redux"
-      ],
-      { save: true }
-    );
-    this.npmInstall(
-      [
-        "babel-core",
-        "babel-loader",
-        "babel-preset-react",
-        "babel-preset-stage-2",
-        "css-loader",
-        "mini-css-extract-plugin",
-        "node-sass",
-        "react-hot-loader",
-        "sass-loader",
-        "style-loader",
-        "uglifyjs-webpack-plugin",
-        "webpack",
-        "webpack-cli",
-        "webpack-dev-server",
-        "webpack-merge"
-      ],
-      { saveDev: true }
-    );
+    this.installDependencies();
   }
 
   end() {
     this.log(`project create complete!!!`);
-  }
-
-  install() {
-    this.installDependencies();
   }
 };

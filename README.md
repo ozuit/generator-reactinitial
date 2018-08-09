@@ -13,6 +13,7 @@ npm install -g generator-reactinitial
 Then generate your new project:
 
 ```bash
+mkdir <your-project-name> && cd <your-project-name>
 yo reactinitial
 ```
 
