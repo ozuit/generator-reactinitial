@@ -64,8 +64,8 @@ module.exports = class extends Generator {
   writing() {
     let pkg = Object.assign({}, this.props.package);
     pkg.keywords = this.props.package.keywords.split(" ") || [];
-    this.fs.copy(path.join(__dirname, "templates", "gitignore"), ".gitignore");
-    this.fs.copy(path.join(__dirname, "templates", "babelrc"), ".babelrc");
+    this.fs.copy(path.join(__dirname, "templates", ".gitignore"), ".gitignore");
+    this.fs.copy(path.join(__dirname, "templates", ".babelrc"), ".babelrc");
     this.fs.copy(path.join(__dirname, "templates", "README.md"), "README.md");
     this.fs.copy(
       path.join(__dirname, "templates", "webpack.common.js"),
@@ -76,8 +76,8 @@ module.exports = class extends Generator {
     this.fs.copy(path.join(__dirname, "templates", "dist/"), "dist/");
 
     pkg.scripts = {
-      dev: "webpack --config ./webpack.config.dev.js && node server.js",
-      build: "webpack"
+      start: "webpack-dev-server --open --config config/webpack.dev.js",
+      build: "webpack --config config/webpack.prod.js"
     };
     this.fs.writeJSON(this.destinationPath("package.json"), pkg);
   }
